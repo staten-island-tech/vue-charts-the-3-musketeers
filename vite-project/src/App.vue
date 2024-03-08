@@ -2,7 +2,18 @@
 <template>
 <p> yes</p>
 </template>
-
+<script setup>
+import { ref, onBeforeMount } from "vue";
+const schools = ref("");
+async function getsat() {
+    let res = await fetch("https://data.cityofnewyork.us/resource/zt9s-n5aj.json");
+    let data = await res.json();
+    schools.value = data.results;
+}
+onBeforeMount(() => {
+    getsat();
+});
+</script>
 <style scoped>
 header {
   line-height: 1.5;
