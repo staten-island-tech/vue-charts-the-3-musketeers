@@ -1,12 +1,23 @@
 <template>
     <div>
-        <h1>api url: https://data.cityofnewyork.us/resource/zt9s-n5aj.json?</h1>
+        <h1>api url: </h1>
     </div>
 </template>
 
-<script>
-import {pie} from 'vue-chartjs'
-const data = {
+<script setup>
+import {pie} from 'vue-chartjs';
+import { onBeforeMount } from 'vue';
+const mathscores = ref("");
+async function getMath(){
+  let res = await fetch("https://data.cityofnewyork.us/resource/zt9s-n5aj.json?");
+  let data = await res.json();
+  mathscores.value = data.results;
+}
+
+onBeforeMount(() => {
+  getMath();
+});
+const meow = {
   labels: [
     '280-380',
     '381-550',
@@ -14,7 +25,6 @@ const data = {
   ],
   datasets: [{
     label: 'Number of Students',
-    data: [300, 50, 100],
     backgroundColor: [
       'rgb(255, 99, 132)',
       'rgb(54, 162, 235)',
