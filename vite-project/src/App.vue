@@ -1,21 +1,28 @@
 
-<template>
-<p> yes</p>
-</template>
+
 <script setup>
-import { ref, onBeforeMount } from 'vue';
-const schools = ref('');
-async function getsat() {
-    let response = await fetch("https://data.cityofnewyork.us/resource/zt9s-n5aj.json");
+import { ref, onBeforeMount } from 'vue'
+const schools = ref('')
+const getsat = async()=>{
+let response = await fetch("https://data.cityofnewyork.us/resource/zt9s-n5aj.json");
     let data = await response.json();
-    schools.value = data.results;
+    schools.value = data;
+    console.log(data);
 }
-onBeforeMount(() => {
-    getsat();
-});
-onBeforeMount();
+onBeforeMount(()=>{
+  getsat();
+})
+
 </script>
+<template>
+  <div ref="schools"> 
+<ol>
+  <li v-for="x in schools.value">{{ x }}</li>
+</ol>
+</div>
+  </template>
 <style scoped>
+
 header {
   line-height: 1.5;
   max-height: 100vh;
