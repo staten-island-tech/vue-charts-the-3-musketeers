@@ -15,9 +15,9 @@ onBeforeMount(()=>{
 
 </script>
 <template>
-  <div ref="schools"> 
+  <div>
 <ol>
-  <li v-for="x in schools.value">{{ x }}</li>
+  <li v-for="x in schools">{{ x.school_name }}</li>
 </ol>
 </div>
   </template>
