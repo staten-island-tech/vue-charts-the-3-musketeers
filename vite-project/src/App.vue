@@ -3,16 +3,17 @@
 <p> yes</p>
 </template>
 <script setup>
-import { ref, onBeforeMount } from "vue";
-const schools = ref("");
+import { ref, onBeforeMount } from 'vue';
+const schools = ref('');
 async function getsat() {
-    let res = await fetch("https://data.cityofnewyork.us/resource/zt9s-n5aj.json");
-    let data = await res.json();
+    let response = await fetch("https://data.cityofnewyork.us/resource/zt9s-n5aj.json");
+    let data = await response.json();
     schools.value = data.results;
 }
 onBeforeMount(() => {
     getsat();
 });
+onBeforeMount();
 </script>
 <style scoped>
 header {
