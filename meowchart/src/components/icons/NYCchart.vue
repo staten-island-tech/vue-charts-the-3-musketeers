@@ -27,7 +27,7 @@ const meow = {
     '700+',
   ],
   datasets: [{
-    label: 'Number of Students',
+    label: '% of Schools',
     backgroundColor: [
       'rgb(147, 47, 109)',
       'rgb(48, 82, 82)',
