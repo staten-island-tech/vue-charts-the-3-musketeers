@@ -3,23 +3,57 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue'
 const schools = ref('')
-const getsat = async()=>{
-let response = await fetch("https://data.cityofnewyork.us/resource/zt9s-n5aj.json");
-    let data = await response.json();
-    schools.value = data;
-    console.log(data);
-}
-onBeforeMount(()=>{
-  getsat();
-})
+import { Bar } from 'vue-chartjs'
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+
+export default {
+  name: 'BarChart',
+  components: { Bar },
+  data() {
+    return {
+      chartData: {
+        labels: [ 'January', 'February', 'March'],
+        datasets: [
+          {
+            label: 'Data One',
+            backgroundColor: '#f87979'  ,
+            data: [40, 20, 12]
+          }
+        ]
+      }
+    }
+  }
+}
+
+// export default {
+//   name: 'BarChart',
+//   components: { Bar },
+//   data: () => ({
+//     loaded: false,
+//     chartData: null
+//   }),
+// const getsat = async()=>{
+// let response = await fetch("https://data.cityofnewyork.us/resource/zt9s-n5aj.json");
+//     let data = await response.json();
+//     schools.value = data;
+//     console.log(data);
+// }
+// onBeforeMount(()=>{
+//   getsat();
+// })
+// }
 </script>
 <template>
-  <div>
-<ol>
-  <li v-for="x in schools">{{ x.school_name }}</li>
-</ol>
-</div>
+
+<!-- <ol>
+  <li v-for="x in schools">{{ x.number_of_test_takers }}</li>
+</ol> -->
+<div class="container">
+    <Bar v-if="loaded" :data="chartData" />
+  </div>
+
   </template>
 <style scoped>
 
