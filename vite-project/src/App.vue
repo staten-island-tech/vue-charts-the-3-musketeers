@@ -67,7 +67,7 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
      schoolNames.value = data.map(school =>{ 
       return school.school_name ? school.school_name : ""});
      mathScores.value = data.map(school =>{ 
-      return school.mathematics_mean ? parseInt(school.mathematics_mean) : 0});
+      return school.critical_reading_mean ? parseInt(school.critical_reading_mean) : 0});
      schools.value = data;
      /* chartData.value = {
       labels: schoolNames,
@@ -115,11 +115,12 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
       labels: schoolNames,
       datasets: [
         {
-          label: 'Math!',
+          label: 'Reading!',
           data: mathScores,
-          backgroundColor: '#f87979'
-        }
-      ]
+          backgroundColor: '#f87979',
+          maintainAspectRatio: false,
+        },
+      ],
     }" />
   </div>
 
