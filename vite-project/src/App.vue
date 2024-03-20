@@ -7,7 +7,14 @@
 <script setup>
 console.log("rachel says meow");
 
+import { Bar } from 'vue-chartjs';
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 import { ref, onMounted } from 'vue';
+
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+
+
+
 const NY = ref('')
 async function getNY(){
   let res = await fetch('https://data.cityofnewyork.us/resource/zt9s-n5aj.json')
@@ -20,7 +27,26 @@ onMounted(()=>{
 });
 
 
+const ctx = document.getElementById('myChart');
 
+new ChartJShart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+    datasets: [{
+      label: '# of Votes',
+      data: [12, 19, 3, 5, 2, 3],
+      borderWidth: 1
+    }]
+  },
+  options: {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
 
 
 </script>
