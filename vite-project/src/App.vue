@@ -3,12 +3,15 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue'
 const schools = ref('')
+const schoolNames = ref('')
+const mathScores = ref('')
+const chartData = ref()
 import { Bar } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
-export default {
+/* export default {
   name: 'BarChart',
   components: { Bar },
   data() {
@@ -25,25 +28,82 @@ export default {
       }
     }
   }
-}
+} */
+/* export default {
+  name: 'BarChart',
+  components: { Bar },
+  data: () => ({
+    loaded: false,
+    chartData: null
+  }),
+  async mounted () {
+    this.loaded = false
 
-// export default {
-//   name: 'BarChart',
-//   components: { Bar },
-//   data: () => ({
-//     loaded: false,
-//     chartData: null
-//   }),
-// const getsat = async()=>{
-// let response = await fetch("https://data.cityofnewyork.us/resource/zt9s-n5aj.json");
-//     let data = await response.json();
-//     schools.value = data;
-//     console.log(data);
-// }
-// onBeforeMount(()=>{
-//   getsat();
-// })
-// }
+    try {
+      const { userlist } = await fetch('/api/userlist')
+      this.chartdata = userlist
+
+      this.loaded = true`
+    } catch (e) {
+      console.error(e)
+    }
+  }
+} */
+/* defineProps({
+  chartData: {
+        labels: [ 'January', 'February', 'March'],
+        datasets: [
+          {
+            label: 'Data One',
+            backgroundColor: '#f87979'  ,
+            data: [40, 20, 12]
+          }
+        ]
+      }
+}) */
+ const getsat = async()=>{
+ let response = await fetch("https://data.cityofnewyork.us/resource/zt9s-n5aj.json");
+     let data = await response.json();
+     schoolNames.value = data.map(school =>{ 
+      return school.school_name ? school.school_name : ""});
+     mathScores.value = data.map(school =>{ 
+      return school.mathematics_mean ? parseInt(school.mathematics_mean) : 0});
+     schools.value = data;
+     /* chartData.value = {
+      labels: schoolNames,
+      datasets: [
+        {
+          label: 'Math!',
+          data: mathScores,
+          backgroundColor: '#f87979'
+        }
+      ]
+    } */
+    chartData.value = {
+        labels: [ 'January', 'February', 'March'],
+        datasets: [
+          {
+            label: 'Data One',
+            backgroundColor: '#f87979'  ,
+            data: [40, 20, 12]
+          }
+        ]
+      }
+     console.log(chartData.value);
+ }
+ onBeforeMount(()=>{
+   getsat();
+   /* chartData.value = {
+        labels: [ 'January', 'February', 'March'],
+        datasets: [
+          {
+            label: 'Data One',
+            backgroundColor: '#f87979'  ,
+            data: [40, 20, 12]
+          }
+        ]
+      } */
+ })
 </script>
 <template>
 
@@ -51,12 +111,21 @@ export default {
   <li v-for="x in schools">{{ x.number_of_test_takers }}</li>
 </ol> -->
 <div class="container">
-    <Bar v-if="loaded" :data="chartData" />
+    <Bar  :data="{
+      labels: schoolNames,
+      datasets: [
+        {
+          label: 'Math!',
+          data: mathScores,
+          backgroundColor: '#f87979'
+        }
+      ]
+    }" />
   </div>
 
   </template>
 <style scoped>
-
+/* v-if="loaded" */
 header {
   line-height: 1.5;
   max-height: 100vh;
