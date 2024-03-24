@@ -1,19 +1,18 @@
 <template>
   <div>
-<h1>bleep bop</h1>
-<canvas id="myChart"></canvas>
+
+<h1>Chart of NYC Writing SAT Scores in 2010</h1>
+<canvas ref="pieChart" width="400" height="400"></canvas>
   </div>
 </template>
 
 <script setup>
-console.log("rachel says meow");
 
-import { Bar } from 'vue-chartjs';
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 import { ref, onMounted } from 'vue';
+import { Pie } from 'vue-chartjs';
 
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
+console.log("rachel says meow");
 
 
 const NY = ref('')
@@ -24,12 +23,22 @@ async function getNY(){
   console.log(data);
 }
 onMounted(()=>{
-  getNY()
+  getNY().then(() => {
+    generatePieChart();
+  });
 });
 
-const ctx = document.getElementById('myChart');
 
-new 
+  const scoreRanges = {
+    '300-350': 0,
+    '351-400': 0,
+    '401-450': 0,
+    '451-500': 0,
+    '501-550': 0,
+    '551-600': 0,
+    '601-650': 0
+  };
+
 
 
 
