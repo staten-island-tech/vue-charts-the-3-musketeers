@@ -7,10 +7,11 @@
   </div>
 </template>
 
-<script setup>
+<script setup >
 
 import { ref, onMounted } from 'vue';
 import { Pie } from 'vue-chartjs';
+import { Bar } from 'vue-chartjs';
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
@@ -29,7 +30,8 @@ async function getNY(){
 
 function process(data) {
   let scoreRanges = {
-    "300-350": 0, 
+    "250-300": 0,
+    "301-350": 0, 
     "351-400": 0, 
     "401-450": 0,
     "451-500": 0,
@@ -41,8 +43,10 @@ function process(data) {
 
   data.forEach(school => {
     let writingScore = parseInt(school.writing_mean); 
-    if (writingScore >= 300 && writingScore <= 350) {
-      scoreRanges['300-350']++;
+    if (writingScore >= 250 && writingScore <= 300) {
+      scoreRanges['250-300']++;
+    } else if (writingScore <= 350) {
+      scoreRanges['301-350']++;
     } else if (writingScore <= 400) {
       scoreRanges['351-400']++;
     } else if (writingScore <= 450) {
@@ -69,50 +73,21 @@ function process(data) {
   }
 
   console.log(percentages); //% of schools
-
-  let chartData = {
-    labels: [],
-    datasets: [{
-      data: [],
-      backgroundColor: [
-        '#FF6384',
-        '#36A2EB',
-        '#FFCE56',
-        '#4BC0C0',
-        '#9966FF',
-        '#FF9900',
-        '#0099CC', //find real good colors
-      ]
-    }]
-  };
-
-  for (let range in percentages) {
-    chartData.labels.push(range);
-    chartData.datasets[0].data.push(scoreRanges[range]);
-  }
-  console.log(chartData);
-  return (chartData);
+  
 }
+
+
+
+
 
 onMounted(() => {
   getNY();
 });
 
+
+
+
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
