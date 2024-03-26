@@ -101,7 +101,7 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
             backgroundColor: '#f87979'  ,
             data: [40, 20, 12]
           }
-        ]
+        ]  
       } */
  })
 </script>
@@ -121,12 +121,20 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
           maintainAspectRatio: false,
         },
       ],
+      options: {
+responsive: true,
+maintainAspectRatio: false,
+      },
     }" />
   </div>
 
   </template>
 <style scoped>
 /* v-if="loaded" */
+.container {
+  height: 1053px;
+  width: 2109px;
+}
 header {
   line-height: 1.5;
   max-height: 100vh;
