@@ -17,12 +17,20 @@ ChartJS.register(Title, Tooltip, Legend, PieController, CategoryScale, LinearSca
 const math = ref('')
 async function getMaths(){
   let res = await fetch('https://data.cityofnewyork.us/resource/zt9s-n5aj.json?')
-  let data = await res.json()
+  let data = await res.json();
   math.value=data.results
 }
 onBeforeMount(() => {
 getMaths();
 });
+
+// use a for each/loop to iterate through the list, then for each # that is within
+//the range, just add from --> [0], or the previous #.
+
+for (let i = 0; i < data.length; i++){
+  
+}
+
 const meow = {
 labels: [
   '200-299',
