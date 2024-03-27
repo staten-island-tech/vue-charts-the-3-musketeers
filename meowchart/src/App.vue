@@ -26,6 +26,7 @@ getMaths();
 
 // use a for each/loop to iterate through the list, then for each # that is within
 //the range, just add from --> [0], or the previous #.
+// USE IF/ELSE?????
 
 for (let i = 0; i < data.length; i++){
   
