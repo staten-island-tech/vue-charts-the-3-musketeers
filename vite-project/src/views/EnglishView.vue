@@ -1,8 +1,9 @@
-
-
 <script setup>
-import { ref, onBeforeMount } from 'vue'
+import {useRoute} from 'vue-router'
+import { ref, onBeforeMount, onMounted } from 'vue'
 const schools = ref('')
+const route = useRoute()
+const searchValue = ref();
 const schoolNames = ref('')
 const mathScores = ref('')
 const chartData = ref()
@@ -64,6 +65,10 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
  const getsat = async()=>{
  let response = await fetch("https://data.cityofnewyork.us/resource/zt9s-n5aj.json");
      let data = await response.json();
+     
+     if (searchValue.value){
+      data = data.filter(school=>school.school_name.includes(searchValue.value))
+     }
      schoolNames.value = data.map(school =>{ 
       return school.school_name ? school.school_name : ""});
      mathScores.value = data.map(school =>{ 
@@ -92,7 +97,7 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
      console.log(chartData.value);
  }
  onBeforeMount(()=>{
-   getsat();
+   /* getsat(); */
    /* chartData.value = {
         labels: [ 'January', 'February', 'March'],
         datasets: [
@@ -104,21 +109,17 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
         ]  
       } */
  })
+ onMounted(()=>{
+  searchValue.value = route.params.value;
+  getsat();
+ })
 </script>
 <template>
 
 <!-- <ol>
   <li v-for="x in schools">{{ x.number_of_test_takers }}</li>
 </ol> -->
-<div>
-<router-link to="/about">a</router-link>
-<router-link to="/">home</router-link>
-<router-link to="/english">english</router-link>
-</div>
-<div>
-<router-view></router-view>
-</div>
-<!-- <div class="container">
+<div class="container">
     <Bar  :data="{
       labels: schoolNames,
       datasets: [
@@ -134,7 +135,7 @@ responsive: true,
 maintainAspectRatio: false,
       },
     }" />
-  </div> -->
+  </div>
 
   </template>
 <style scoped>
@@ -205,3 +206,4 @@ nav a:first-of-type {
   }
 }
 </style>
+

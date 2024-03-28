@@ -1,9 +1,24 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import {ref} from 'vue'
+import {useRouter} from 'vue-router'
+const searchValue = ref('staten')
+const router = useRouter()
+const search = ()=>{
+  router.push({
+    name:"english",
+    query: {value: searchValue.value}
+  })
+  
+  
+}
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+<div style="height: 400px; width: 400px">
+<label for="searchfield">
+  search for school:
+</label>
+<input id="searchfield" v-model="searchValue"/>
+<button @click="search">search</button>
+</div> 
 </template>
