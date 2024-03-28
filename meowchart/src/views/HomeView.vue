@@ -5,6 +5,7 @@
 </template>
 
 <script setup>
+import NYCchart from '@/components/icons/NYCchart.vue';
 
 </script>
 
