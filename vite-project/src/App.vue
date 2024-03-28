@@ -61,6 +61,7 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
         ]
       }
 }) */
+let apidata = ref()
  const getsat = async()=>{
  let response = await fetch("https://data.cityofnewyork.us/resource/zt9s-n5aj.json");
      let data = await response.json();
@@ -69,6 +70,7 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
      mathScores.value = data.map(school =>{ 
       return school.critical_reading_mean ? parseInt(school.critical_reading_mean) : 0});
      schools.value = data;
+     apidata = data
      /* chartData.value = {
       labels: schoolNames,
       datasets: [
@@ -110,8 +112,11 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 <!-- <ol>
   <li v-for="x in schools">{{ x.number_of_test_takers }}</li>
 </ol> -->
+<div class="card" v-for="data in apidata">
+  <h1>{{ data.school_name }}</h1>
+</div>
 <div>
-<router-link to="/about">a</router-link>
+<router-link to="/about">math</router-link>
 <router-link to="/">home</router-link>
 <router-link to="/english">english</router-link>
 </div>

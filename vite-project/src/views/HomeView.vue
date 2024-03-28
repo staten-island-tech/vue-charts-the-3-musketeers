@@ -11,9 +11,13 @@ const search = ()=>{
   
   
 }
+
 </script>
 
 <template>
+  <div class="card" v-if="data" v-for="data in data">
+  <h1>{{ data.school_name }}</h1>
+</div>
 <div style="height: 400px; width: 400px">
 <label for="searchfield">
   search for school:
