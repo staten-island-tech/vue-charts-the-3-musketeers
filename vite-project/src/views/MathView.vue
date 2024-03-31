@@ -1,6 +1,6 @@
 <template>
   <div>
-<h1>2010 NYC Math SAT Scoress</h1>
+<h1>2010 NYC Math SAT Scores</h1>
 <canvas ref="pieChart" width="500" height="500"></canvas>
   </div>
 </template>

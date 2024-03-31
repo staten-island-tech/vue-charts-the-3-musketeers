@@ -118,8 +118,8 @@ let apidata = ref()
 <div>
 <router-link to="/">home</router-link>
 <router-link to="/math">math</router-link>
-<router-link to="/english">english</router-link>
 <router-link to="/reading">reading</router-link>
+<router-link to="/writing">writing</router-link>
 </div>
 <div>
 <router-view></router-view>

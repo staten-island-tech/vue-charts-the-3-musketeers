@@ -46,6 +46,7 @@ const getsat = async()=>{
 
 <template>
   <div>
+    <p>All NYC high schools:</p>
     <ol>
       <li v-for="school in schools">{{ school.school_name }}</li>
     </ol>

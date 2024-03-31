@@ -66,9 +66,7 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
  let response = await fetch("https://data.cityofnewyork.us/resource/zt9s-n5aj.json");
      let data = await response.json();
      
-     if (searchValue.value){
-      data = data.filter(school=>school.school_name.includes(searchValue.value))
-     }
+     
      schoolNames.value = data.map(school =>{ 
       return school.school_name ? school.school_name : ""});
      mathScores.value = data.map(school =>{ 
@@ -121,7 +119,7 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
       labels: schoolNames,
       datasets: [
         {
-          label: 'Reading!',
+          label: '2010 NYC Reading SAT Scores by Schools',
           data: mathScores,
           backgroundColor: '#f87979',
           maintainAspectRatio: false,
