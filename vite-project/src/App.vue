@@ -68,7 +68,7 @@ function process(data) {
     } 
   });
 
-  //console.log(scoreRanges); //amt of schools in score range
+  console.log(scoreRanges); //amt of schools in score range
 
 /*   let totalSchools = data.length;
   let percentages = {};
