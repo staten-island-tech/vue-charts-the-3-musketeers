@@ -18,9 +18,9 @@ const math = ref('')
 async function getMaths(){
   let res = await fetch('https://data.cityofnewyork.us/resource/zt9s-n5aj.json?')
   let data = await res.json();
-  
-   mathematicsScores.value = data.map(schools =>{
-    return schools.mathematics_mean ? parseInt(schools.mathematics_mean): 0}) 
+  data = data.filter(school=>school.mathematics_mean);
+   the(data);
+   console.log(data)
 }
 onBeforeMount(() => {
 getMaths();
