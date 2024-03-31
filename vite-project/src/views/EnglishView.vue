@@ -108,9 +108,6 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
           }
         ]  
       } */
- })
- onMounted(()=>{
-  searchValue.value = route.params.value;
   getsat();
  })
 </script>
