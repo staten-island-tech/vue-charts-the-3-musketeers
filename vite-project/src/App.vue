@@ -116,10 +116,10 @@ let apidata = ref()
   <h1>{{ data.school_name }}</h1>
 </div>
 <div>
-<router-link to="/">home</router-link>
-<router-link to="/math">math</router-link>
-<router-link to="/reading">reading</router-link>
-<router-link to="/writing">writing</router-link>
+<router-link to="/">Home</router-link>
+<router-link to="/math">Math</router-link>
+<router-link to="/reading">Reading</router-link>
+<router-link to="/writing">Writing</router-link>
 </div>
 <div>
 <router-view></router-view>
